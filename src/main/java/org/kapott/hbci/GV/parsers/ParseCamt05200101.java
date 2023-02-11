@@ -27,7 +27,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-import javax.xml.bind.JAXB;
+import jakarta.xml.bind.JAXB;
 
 import org.kapott.hbci.GV.SepaUtil;
 import org.kapott.hbci.GV_Result.GVRKUms.BTag;
@@ -60,6 +60,8 @@ import org.kapott.hbci.sepa.jaxb.camt_052_001_01.TransactionReferences1;
 import org.kapott.hbci.structures.Konto;
 import org.kapott.hbci.structures.Saldo;
 import org.kapott.hbci.structures.Value;
+
+							 
 
 /**
  * Parser zum Lesen von Umsaetzen im CAMT.052 Format in Version 001.01.
@@ -273,11 +275,67 @@ public class ParseCamt05200101 extends AbstractCamtParser
         // Verwendungszweck
         List<String> usages = tx.getRmtInf() != null ? tx.getRmtInf().getUstrd() : null;
         if (usages != null && usages.size() > 0)
+		 
             line.usage.addAll(trim(usages));
+			  
+																					
+		 
+
+																				
+				 
+											   
+																				  
+																		 
+										 
         //
         ////////////////////////////////////////////////////////////////////////
 
+																				
+							 
+																				  
+																 
+																			  
+		  
+																				
+
+
+																				
+									 
+														 
+																		   
+
+													   
+																			
+
+																					   
+							   
+		 
+									 
+		 
+								
+		 
+									 
+			  
+																					
+		 
+
         ////////////////////////////////////////////////////////////////////////
+				
+								 
+																					 
+													   
+										  
+		  
+																				
+
+																				
+								 
+												  
+														
+		  
+																				
+
+																				
         // Primanota, GV-Code und GV-Code-Ergaenzung
         // Ich weiss nicht, ob das bei allen Banken so codiert ist.
         // Bei der Sparkasse ist es jedenfalls so.
@@ -358,6 +416,7 @@ public class ParseCamt05200101 extends AbstractCamtParser
         //
         ////////////////////////////////////////////////////////////////
         
+				  
         ////////////////////////////////////////////////////////////////
         // Das eigene Konto ermitteln
         CashAccount13 acc = report.getAcct();
@@ -367,9 +426,11 @@ public class ParseCamt05200101 extends AbstractCamtParser
         
         BranchAndFinancialInstitutionIdentification3 bank = acc.getSvcr();
         if (bank != null && bank.getFinInstnId() != null)
+		 
         tag.my.bic  = trim(bank.getFinInstnId().getBIC());
         ////////////////////////////////////////////////////////////////
         
+
         return tag;
     }
     
@@ -382,10 +443,11 @@ public class ParseCamt05200101 extends AbstractCamtParser
     private BigDecimal checkDebit(BigDecimal d, CreditDebitCode code)
     {
         if (d == null || code == null || code == CreditDebitCode.CRDT)
+		 
             return d;
         
+
         return BigDecimal.ZERO.subtract(d);
     }
 }
-
 
